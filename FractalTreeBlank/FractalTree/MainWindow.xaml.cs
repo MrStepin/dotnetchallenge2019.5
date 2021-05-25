@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
@@ -22,6 +23,7 @@ namespace FractalTree
 
         private void DrawFractal(Point start, double length, double angle)
         {
+
             var myLine = new Line
             {
                 Stroke = _brush,
@@ -31,11 +33,14 @@ namespace FractalTree
                 Y2 = start.Y - length * Math.Sin(angle),
                 StrokeThickness = 1
             };
-
             canvas.Children.Add(myLine);
-
-            //Задержка в отрисовке для создания анимации
             Sleep();
+            if (length > 2)
+            {
+                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle + 1));
+                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle - 1));
+            }
+            return;
         }
 
         private void Sleep(int ms = 1)

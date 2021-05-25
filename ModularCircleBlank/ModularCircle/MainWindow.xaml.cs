@@ -31,7 +31,7 @@ namespace ModularCircle
         private readonly Brush _pointBrush = Brushes.CornflowerBlue;
         private readonly Brush _lineBrush = Brushes.CornflowerBlue;
 
-        private const double _factor = 2;
+        private const double _factor = 99;
 
         public MainWindow()
         {
@@ -62,7 +62,17 @@ namespace ModularCircle
 
             //todo: из каждой точки на окружности провести линию, используя метод DrawLine
             //Номер точки, в которую нужно вести линию вычисляется по формуле из видео
-
+            //int k = 0;
+            for (int i = 0;  i < circlePoints.Length; i++)
+            {
+                int toPoint = (int)(i * _factor % _circlePointCount);
+                //if (toPoint > (_circlePointCount - _factor))
+                //{
+                //    toPoint = (int)(toPoint - (i * _factor) + k);
+                //    k++;
+                //}
+                DrawLine(circlePoints[i], circlePoints[toPoint], _lineBrush);
+            }
         }
 
         private void DrawLine(Point from, Point to, Brush brush)
