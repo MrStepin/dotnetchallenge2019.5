@@ -21,9 +21,12 @@ namespace FractalTree
             InitializeComponent();
         }
 
+        double deltaOfAngle = 1;
+        int whenStopDrawing = 20;
+        int _n = 0;
+
         private void DrawFractal(Point start, double length, double angle)
         {
-
             var myLine = new Line
             {
                 Stroke = _brush,
@@ -35,10 +38,11 @@ namespace FractalTree
             };
             canvas.Children.Add(myLine);
             Sleep();
-            if (length > 2)
+            _n += 1;
+            if (length > whenStopDrawing)
             {
-                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle + 1));
-                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle - 1));
+                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle + deltaOfAngle));
+                DrawFractal(new Point(myLine.X2, myLine.Y2), length / 2, (angle - deltaOfAngle));
             }
             return;
         }

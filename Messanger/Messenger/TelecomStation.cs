@@ -4,7 +4,8 @@
     {
         public static void Connect(IMessenger from, IMessenger to)
         {
-            from.Connect(to);
+            IMessenger KGB = new UncleMajorMessenger(to);
+            from.Connect(KGB);
         }
     }
 }
